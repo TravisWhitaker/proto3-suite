@@ -17,6 +17,8 @@ module Proto3.Suite.DotProto.Rendering
   , RenderingOptions(..)
   ) where
 
+import Prelude hiding ((<>))
+
 import           Data.Char
 import qualified Data.Text                       as T
 import           Filesystem.Path.CurrentOS       (toText)
@@ -63,7 +65,7 @@ renderDotProto opts DotProto{..}
  $$ (PP.vcat $ prettyPrintProtoDefinition opts <$> protoDefinitions)
 
 instance Pretty DotProtoPackageSpec where
-  pPrint (DotProtoPackageSpec p) = PP.text "package" <+> pPrint p <> PP.text ";"
+  pPrint (DotProtoPackageSpec p) = PP.text "package" <+> (pPrint p <> PP.text ";")
   pPrint (DotProtoNoPackage)     = PP.empty
 
 instance Pretty DotProtoImport where
